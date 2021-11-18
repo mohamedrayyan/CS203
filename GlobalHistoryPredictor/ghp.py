@@ -143,11 +143,19 @@ for i in range(100):
 
 counter =0
 correct =0
+correctX =0
+correctY =0
 for i in table:
     if i[5] ==i[6]:
         correct +=1
-    counter +=1
+        if i[2] =="X":
+            correctX +=1
+        else:
+            correctY +=1
+    # counter +=1
     print(i)
     # if counter ==12:
     #     break
 print(correct, "/", len(table))
+print("correctX =", correctX)
+print("correctY =", correctY)
