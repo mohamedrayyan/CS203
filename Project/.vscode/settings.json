@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "prefetcher.C": "cpp",
+        "memQueue.C": "cpp",
+        "main.C": "cpp",
+        "CPU.C": "cpp"
+    }
+}

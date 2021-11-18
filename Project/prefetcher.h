@@ -11,11 +11,16 @@
 
 #include <sys/types.h>
 #include "mem-sim.h"
+#include <queue>
+
+using namespace std;
 
 class Prefetcher {
   private:
 	bool _ready;
+	bool _pattern;
 	Request _nextReq;
+	queue<u_int32_t> _req_queue;
 
   public:
 	Prefetcher();
