@@ -1,47 +1,43 @@
+// Mohamed Rayyan
+// mrayy002
+// 862037325
+
 #ifndef PREFETCHER_H
 #define PREFETCHER_H
 
 #include <sys/types.h>
 #include <iostream>
+#include <bitset>
 #include <queue>
 #include <vector>
 #include <map>
 
 #include "mem-sim.h"
-// struct Request;
+struct Request;
 
 using namespace std;
-
-struct details {
-	u_int32_t lastAddr;
-	u_int32_t pc;
-	u_int32_t lastPrefetch;
-	vector<u_int32_t> deltas;
-};
 
 class Prefetcher {
   private:
 	bool _ready;
-	bool _pattern;
 	queue<u_int32_t> _req_queue;
 	vector<u_int32_t> _history;
-	vector<u_int32_t> candidates;
-	vector<u_int32_t> prefetches;
-	vector<u_int32_t> reqqueue;
-	vector<u_int32_t> inFlight;
-	map<u_int32_t, details> table;
-	map<u_int32_t, bool> mshr;
   public:
 	Prefetcher();
 	~Prefetcher();
 
 	int getIndex(vector<u_int32_t> v, int e) {
+		vector<u_int32_t> indexes;
 		for(int i =0; i <v.size(); i++) {
 			if(v[i] ==e) {
-				return i;
+				indexes.push_back(i);
 			}
 		}
-		return -1;
+		if(indexes.size() ==0) {
+			return -1;
+		}
+
+		return indexes[indexes.size() -1];
 	}
 
 	// should return true if a request is ready for this cycle
@@ -58,10 +54,6 @@ class Prefetcher {
 	 * Note that only the addr, pc, load, issuedAt, and HitL1 should be considered valid data
 	 */
 	void cpuRequest(Request req);
-
-	vector<u_int32_t> deltaCorrelation(details entry);
-	vector<u_int32_t> prefetchFilter(details entry, vector<u_int32_t> candids);
-	void issuePrefetches(vector<u_int32_t> prefets);
 };
 
 #endif

@@ -4,6 +4,7 @@
         "cache.C": "cpp",
         "main.C": "cpp",
         "ostream": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "bitset": "cpp"
     }
 }
